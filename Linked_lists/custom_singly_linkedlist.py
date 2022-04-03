@@ -90,11 +90,13 @@ class LinkedList:
 
         if index >= self.length:
             return 'index out of range'
-
         node_to_remove = self.traverse_to_index(index)
-        leader = self.traverse_to_index(index-1)
-        # Due to Garbage collection in Python as there are no pointers to node_to_remove its life ends.
-        leader['next'] = node_to_remove['next']
+        if index == 0:
+            self.head= node_to_remove['next']
+        else:
+            leader = self.traverse_to_index(index-1)
+            # Due to Garbage collection in Python as there are no pointers to node_to_remove its life ends.
+            leader['next'] = node_to_remove['next']
         # Update the length of linked list
         self.length -= 1
         return f'removed node at index: {index}'
@@ -108,6 +110,6 @@ print(myLinkedList.lookup(22))
 myLinkedList.insert(0, 99)
 myLinkedList.insert(54, 20)
 print(myLinkedList.print_list())
-print(myLinkedList.remove(2))
+print(myLinkedList.remove(0))
 print(myLinkedList.print_list())
 print(vars(myLinkedList))
